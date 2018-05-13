@@ -3,50 +3,27 @@ require('./config/config');
 
 const express = require('express');
 const app = express();
+//eslint-disable-next-line
+const color =require('colors');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
 app.use(bodyParser.json());
+
+app.use (require('./routes/usuario'));
  
-app.get('/usuario', function (req, res) {
-    res.json('get Usuario');
-});
 
-app.post('/usuario', function (req, res) {
 
-    let body = req.body;
+mongoose.connect(process.env.URL_DB, (err, res) => {
 
-    if  (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    }
-    else {
-        res.json({
-            body
-        });
-    }
+    if (err) throw err;
 
-    
-});
-
-app.put('/usuario/:id', function (req, res) {
-
-    let id = req.params.id;
-
-    res.json(
-        {
-            id
-        }
-    );
-});
-
-app.delete('/usuario', function (req, res) {
-    res.json('delete Usuario');
+    //eslint-disable-next-line
+    console.log('Base de datos ONLINE'.bgGreen.black);
 });
 
 app.listen(process.env.PORT, () => {
