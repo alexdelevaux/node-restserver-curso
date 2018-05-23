@@ -19,9 +19,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 // Vencimiento Token
 // ================
 
-// 60 segundos x 60 minutos x 24 horas x 30 días
+// 48 horas
 
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+process.env.CADUCIDAD_TOKEN = '48h';
 
 
 // ================
